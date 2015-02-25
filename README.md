@@ -9,7 +9,7 @@ SDK позволяет подключить ваше приложение к Rus
 
 ```ruby
 dependencies {
-    compile 'ru.welike.beacons:library:0.9@aar' (пока не работает)
+    compile 'ru.welike.beacons:library:0.9@aar'
 }
 ```
 
