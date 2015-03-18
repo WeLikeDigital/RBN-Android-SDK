@@ -24,15 +24,31 @@ dependencies {
 
 ### Инициализация SDK
 
-0. Для работы RNBSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
+1. Для работы RNBSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
 ```XML
 <application ... >
 	<meta-data android:name="ru.welike.rbnsdk.appSecret" android:value="<YUOR_API_KEY>" />
 </application>
 ```
+2. Там же следует указать все разрешения, которые требуются для работы SDK:
+```XML
+	<!-- Выясняем имя пользователя для логов -->
+	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	
+	<!-- Координаты пользователя -->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	
+	<!-- Интернет для отправки логов -->
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	
+	<!-- Bluetooth для взаимодействия с биконами -->
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+```
 
-1. Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и проинициализировать там класс RBNManager
-
+3. Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и проинициализировать там класс RBNManager
 ```Java
 public class JuneApplication extends Application {
     @Override
@@ -42,13 +58,13 @@ public class JuneApplication extends Application {
     }
 }
 ```
+
 Впоследствии можно всегда получить достум к менеджеру через 
 ```Java
 RBNManager.getInstance();
 ```
 
 Для конфигурации SDK можно создать объект класса WLBeaconsConfiguration и передать его в качестве параметра для WLBeaconsManager, либо воспользоваться методами класса WLBeaconsManager напрямую:
-
 ```Java
 	WLBeaconsConfiguration config = new WLBeaconsConfiguration.Builder()
             .enableLogging(true)
@@ -59,7 +75,6 @@ RBNManager.getInstance();
 ```
 
 Для того, чтобы приложение могло получать и обрабатывать данные об акциях, необходимо установить слушатель событий(так же в методе onCreate класса Application):
-
 ```Java
 RBNManager.getInstance().setOnEnterRegionListener(new OnEnterRegionListener() {
             @Override
@@ -69,7 +84,6 @@ RBNManager.getInstance().setOnEnterRegionListener(new OnEnterRegionListener() {
 ```
 
 После этого, как только пользователь войдет в зону действия акции, в вашем приложении сработает метод onEnterRegion(), в качестве параметра у которого будет объект класса BeaconAdvert, содержащий в себе всю информацию об акции. 
-
 ```Java
 String title; // Заголовок объявления
 String push_title; // Заголовок push-уведомления
