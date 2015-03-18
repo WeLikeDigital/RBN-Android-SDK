@@ -24,13 +24,13 @@ dependencies {
 
 ### Инициализация SDK
 
-1. Для работы RNBSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
+1) Для работы RBNSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
 ```XML
 <application ... >
 	<meta-data android:name="ru.welike.rbnsdk.appSecret" android:value="<YUOR_API_KEY>" />
 </application>
 ```
-2. Там же следует указать все разрешения, которые требуются для работы SDK:
+2) Там же следует указать все разрешения, которые требуются для работы SDK:
 ```XML
 	<!-- Выясняем имя пользователя для логов -->
 	<uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -48,7 +48,7 @@ dependencies {
 	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 ```
 
-3. Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и проинициализировать там класс RBNManager
+3) Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и проинициализировать там класс RBNManager
 ```Java
 public class JuneApplication extends Application {
     @Override
