@@ -8,8 +8,13 @@ SDK позволяет подключить ваше приложение к Rus
 Для интеграции SDK в приложение, требуется импортировать библиотеку в проект. Для проектов, использующих систему сборки graddle:
 
 ```ruby
+repositories {
+    mavenCentral()
+    maven { url "https://raw.github.com/WeLikeDigital/RBN-Android-SDK/master" }
+}
 dependencies {
-    compile 'ru.welike.beacons:library:0.9@aar'
+    compile 'org.altbeacon:android-beacon-library:2.1.2@aar'
+    compile 'ru.welike.rbnsdk:library:0.9'
 }
 ```
 
@@ -19,21 +24,27 @@ dependencies {
 
 ### Инициализация SDK
 
-1. Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и создать там объект типа WLBeaconsManager
+0. Для работы RNBSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
+```XML
+<application ... >
+	<meta-data android:name="ru.welike.rbnsdk.appSecret" android:value="WeReallyLoveJune" />
+</application>
+```
+
+1. Для инициализации и конфигурация SDK рекоммендуется переопределить класс Application и проинициализировать там класс RBNManager
 
 ```Java
 public class JuneApplication extends Application {
-    private static final String BEACONS_API_KEY = "YOUR_API_KEY"; 
-    private WLBeaconsManager beaconsManager;
-    public WLBeaconsManager getBeaconsManager() {
-        return beaconsManager;
-    }
     @Override
     public void onCreate() {
         super.onCreate();
-        beaconsManager = new WLBeaconsManager(this, BEACONS_API_KEY);
+        RBNManager.newInstance(this);
     }
 }
+```
+Впоследствии можно всегда получить достум к менеджеру через 
+```Java
+RBNManager.getInstance();
 ```
 
 Для конфигурации SDK можно создать объект класса WLBeaconsConfiguration и передать его в качестве параметра для WLBeaconsManager, либо воспользоваться методами класса WLBeaconsManager напрямую:
@@ -50,10 +61,11 @@ public class JuneApplication extends Application {
 Для того, чтобы приложение могло получать и обрабатывать данные об акциях, необходимо установить слушатель событий(так же в методе onCreate класса Application):
 
 ```Java
-beaconsManager.setOnEnterRegionListener(new OnEnterRegionListener() {
-    @Override
-    public void onEnterRegion(BeaconAdvert advert) {
-    } });
+RBNManager.getInstance().setOnEnterRegionListener(new OnEnterRegionListener() {
+            @Override
+            public void onEnterRegion(BeaconAdvert advert) {
+            }
+        });
 ```
 
 После этого, как только пользователь войдет в зону действия акции, в вашем приложении сработает метод onEnterRegion(), в качестве параметра у которого будет объект класса BeaconAdvert, содержащий в себе всю информацию об акции. 
