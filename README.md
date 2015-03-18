@@ -27,7 +27,7 @@ dependencies {
 0. Для работы RNBSDK в вашем приложении, вам потребуется API KEY, его следует указать в манифесте вашего приложения:
 ```XML
 <application ... >
-	<meta-data android:name="ru.welike.rbnsdk.appSecret" android:value="WeReallyLoveJune" />
+	<meta-data android:name="ru.welike.rbnsdk.appSecret" android:value="<YUOR_API_KEY>" />
 </application>
 ```
 
