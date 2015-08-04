@@ -2,11 +2,11 @@
 <metadata>
   <groupId>ru.welike.rbnsdk</groupId>
   <artifactId>library</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <versioning>
     <versions>
-      <version>1.0</version>
+      <version>1.0.1</version>
     </versions>
-    <lastUpdated>20150804155411</lastUpdated>
+    <lastUpdated>20150804160955</lastUpdated>
   </versioning>
 </metadata>
