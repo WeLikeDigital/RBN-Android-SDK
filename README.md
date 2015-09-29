@@ -14,7 +14,7 @@ repositories {
 }
 dependencies {
     compile 'org.altbeacon:android-beacon-library:2.1.2@aar'
-    compile 'ru.welike.rbnsdk:library:0.9'
+    compile 'ru.welike.rbnsdk:library:+'
 }
 ```
 
